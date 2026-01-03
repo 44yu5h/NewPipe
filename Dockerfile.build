@@ -1,0 +1,19 @@
+# Use official Android build image
+FROM mingc/android-build-box:latest
+
+# Set working directory
+WORKDIR /project
+
+# Copy project files
+COPY . .
+
+# Make gradlew executable
+RUN chmod +x ./gradlew
+
+# Set JAVA_HOME for Java 21
+ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+
+# Build the APK
+RUN ./gradlew assembleDebug --no-daemon --stacktrace
+
+# The APK will be available at app/build/outputs/apk/debug/
