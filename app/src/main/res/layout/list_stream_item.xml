@@ -1,94 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/itemRoot"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
+    android:layout_marginStart="12dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginBottom="8dp"
     android:clickable="true"
     android:focusable="true"
-    android:padding="@dimen/video_item_search_padding">
+    app:cardBackgroundColor="?attr/card_item_background_color"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:rippleColor="?attr/colorControlHighlight"
+    app:strokeWidth="0dp">
 
-    <ImageView
-        android:id="@+id/itemThumbnailView"
-        android:layout_width="@dimen/video_item_search_thumbnail_image_width"
-        android:layout_height="@dimen/video_item_search_thumbnail_image_height"
-        android:scaleType="fitCenter"
-        android:src="@drawable/placeholder_thumbnail_video"
-        app:layout_constraintBottom_toTopOf="@+id/itemProgressView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <org.schabi.newpipe.views.NewPipeTextView
-        android:id="@+id/itemDurationView"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/video_item_search_duration_margin"
-        android:layout_marginBottom="@dimen/video_item_search_duration_margin"
-        android:background="@color/duration_background_color"
-        android:paddingHorizontal="@dimen/video_item_search_duration_horizontal_padding"
-        android:paddingVertical="@dimen/video_item_search_duration_vertical_padding"
-        android:textAllCaps="true"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/duration_text_color"
-        android:textSize="@dimen/video_item_search_duration_text_size"
-        app:layout_constraintBottom_toBottomOf="@id/itemThumbnailView"
-        app:layout_constraintRight_toRightOf="@id/itemThumbnailView"
-        tools:text="1:09:10" />
+        android:padding="0dp">
 
-    <org.schabi.newpipe.views.NewPipeTextView
-        android:id="@+id/itemVideoTitleView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/video_item_search_image_right_margin"
-        android:ellipsize="end"
-        android:maxLines="2"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="@dimen/video_item_search_title_text_size"
-        app:layout_constraintBottom_toTopOf="@+id/itemUploaderView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/itemThumbnailView"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique vitae sem vitae blanditLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum" />
+        <!-- Thumbnail with rounded corners -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/itemThumbnailView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/placeholder_thumbnail_video"
+            app:layout_constraintDimensionRatio="16:9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.NewPipe.Image.Top" />
 
-    <org.schabi.newpipe.views.NewPipeTextView
-        android:id="@+id/itemUploaderView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:lines="1"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textSize="@dimen/video_item_search_uploader_text_size"
-        app:layout_constraintBottom_toTopOf="@+id/itemAdditionalDetails"
-        app:layout_constraintEnd_toEndOf="@+id/itemVideoTitleView"
-        app:layout_constraintStart_toStartOf="@+id/itemVideoTitleView"
-        app:layout_constraintTop_toBottomOf="@+id/itemVideoTitleView"
-        tools:text="Uploader" />
+        <!-- Duration badge with modern styling -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/itemDurationCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:cardBackgroundColor="#DD000000"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/itemThumbnailView"
+            app:layout_constraintEnd_toEndOf="@id/itemThumbnailView">
 
-    <org.schabi.newpipe.views.NewPipeTextView
-        android:id="@+id/itemAdditionalDetails"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:lines="1"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textSize="@dimen/video_item_search_upload_date_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/itemVideoTitleView"
-        app:layout_constraintStart_toStartOf="@+id/itemVideoTitleView"
-        app:layout_constraintTop_toBottomOf="@+id/itemUploaderView"
-        tools:text="2 years ago • 10M views" />
+            <org.schabi.newpipe.views.NewPipeTextView
+                android:id="@+id/itemDurationView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="2dp"
+                android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                tools:text="1:09:10" />
+        </com.google.android.material.card.MaterialCardView>
 
-    <org.schabi.newpipe.views.AnimatedProgressBar
-        android:id="@+id/itemProgressView"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="0dp"
-        android:layout_height="4dp"
-        android:progressDrawable="?progress_horizontal_drawable"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/itemThumbnailView"
-        app:layout_constraintStart_toStartOf="@+id/itemThumbnailView"
-        app:layout_constraintTop_toBottomOf="@+id/itemThumbnailView" />
+        <!-- Content container -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemThumbnailView">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- Title with better typography -->
+            <org.schabi.newpipe.views.NewPipeTextView
+                android:id="@+id/itemVideoTitleView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lineSpacingExtra="2dp"
+                android:maxLines="2"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique vitae sem" />
+
+            <!-- Uploader with modern spacing -->
+            <org.schabi.newpipe.views.NewPipeTextView
+                android:id="@+id/itemUploaderView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="13sp"
+                tools:text="Channel Name" />
+
+            <!-- Additional details with modern typography -->
+            <org.schabi.newpipe.views.NewPipeTextView
+                android:id="@+id/itemAdditionalDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                android:textColor="?android:textColorTertiary"
+                android:textSize="12sp"
+                tools:text="2 years ago • 10M views" />
+
+        </LinearLayout>
+
+        <!-- Progress bar at bottom -->
+        <org.schabi.newpipe.views.AnimatedProgressBar
+            android:id="@+id/itemProgressView"
+            style="@style/Widget.Material3.LinearProgressIndicator"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:progressDrawable="?progress_horizontal_drawable"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

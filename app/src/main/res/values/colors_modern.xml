@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Modern color system for better consistency -->
+    
+    <!-- Surface colors -->
+    <color name="surface_elevated_1">#0DFFFFFF</color> <!-- 5% white overlay -->
+    <color name="surface_elevated_2">#14FFFFFF</color> <!-- 8% white overlay -->
+    <color name="surface_elevated_3">#1FFFFFFF</color> <!-- 12% white overlay -->
+    
+    <!-- Background overlays -->
+    <color name="scrim_overlay">#99000000</color> <!-- 60% black -->
+    <color name="scrim_overlay_light">#66000000</color> <!-- 40% black -->
+    <color name="scrim_overlay_dark">#CC000000</color> <!-- 80% black -->
+    
+    <!-- State overlays -->
+    <color name="state_hover_overlay">#14000000</color> <!-- 8% black for light theme -->
+    <color name="state_pressed_overlay">#1F000000</color> <!-- 12% black for light theme -->
+    <color name="state_focus_overlay">#1F000000</color> <!-- 12% black for light theme -->
+    
+    <!-- Transparent backgrounds -->
+    <color name="transparent_black_20">#33000000</color>
+    <color name="transparent_black_40">#66000000</color>
+    <color name="transparent_black_60">#99000000</color>
+    <color name="transparent_black_80">#CC000000</color>
+    
+    <color name="transparent_white_20">#33FFFFFF</color>
+    <color name="transparent_white_40">#66FFFFFF</color>
+    <color name="transparent_white_60">#99FFFFFF</color>
+    <color name="transparent_white_80">#CCFFFFFF</color>
+    
+    <!-- Status colors -->
+    <color name="success_green">#4CAF50</color>
+    <color name="warning_yellow">#FFC107</color>
+    <color name="error_red">#F44336</color>
+    <color name="info_blue">#2196F3</color>
+    
+    <!-- Accent colors for different themes -->
+    <color name="accent_red_500">#F44336</color>
+    <color name="accent_blue_500">#2196F3</color>
+    <color name="accent_green_500">#4CAF50</color>
+    <color name="accent_purple_500">#9C27B0</color>
+</resources>

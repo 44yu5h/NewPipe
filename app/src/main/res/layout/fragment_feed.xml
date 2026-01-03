@@ -1,102 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/windowBackground">
 
-    <RelativeLayout
+    <!-- Modern refresh banner with card style -->
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/refresh_root_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true"
-        android:paddingTop="8dp"
+        android:layout_margin="12dp"
         android:visibility="gone"
+        app:cardBackgroundColor="?attr/card_item_background_color"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp"
         tools:visibility="visible">
 
-        <LinearLayout
-            android:id="@+id/refresh_info_container"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_toStartOf="@+id/refreshIcon"
-            android:gravity="center_vertical"
-            android:orientation="vertical">
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="16dp">
 
-            <org.schabi.newpipe.views.NewPipeTextView
-                android:id="@+id/refresh_text"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/refreshIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_refresh"
+                android:tint="?attr/colorAccent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <LinearLayout
+                android:id="@+id/refresh_info_container"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:gravity="start|center_vertical"
-                android:maxLines="2"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="14sp"
-                tools:text="@tools:sample/lorem/random" />
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/refreshChevron"
+                app:layout_constraintStart_toEndOf="@+id/refreshIcon"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <org.schabi.newpipe.views.NewPipeTextView
-                android:id="@+id/refresh_subtitle_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:gravity="start|center_vertical"
-                android:maxLines="1"
-                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                android:textSize="12sp"
-                tools:text="@tools:sample/lorem/random" />
-        </LinearLayout>
+                <org.schabi.newpipe.views.NewPipeTextView
+                    android:id="@+id/refresh_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    tools:text="New videos available" />
 
-        <ImageView
-            android:id="@+id/refreshIcon"
-            android:layout_width="24dp"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/refresh_info_container"
-            android:layout_alignBottom="@+id/refresh_info_container"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="6dp"
-            android:layout_marginEnd="12dp"
-            android:src="@drawable/ic_refresh"
-            tools:ignore="ContentDescription" />
+                <org.schabi.newpipe.views.NewPipeTextView
+                    android:id="@+id/refresh_subtitle_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="12sp"
+                    tools:text="Tap to refresh feed" />
+            </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/refresh_info_container"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="8dp"
-            android:background="?attr/separator_color" />
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/refreshChevron"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_expand_more"
+                android:tint="?android:textColorSecondary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- SwipeRefreshLayout with RecyclerView -->
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/refresh_root_view">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/items_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:scrollbars="vertical"
             android:visibility="gone"
+            app:layoutManager="LinearLayoutManager"
             tools:listitem="@layout/list_stream_item"
             tools:visibility="visible" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <Button
+    <!-- Floating action button for new items -->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/new_items_loaded_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/swipeRefreshLayout"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="5sp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="16dp"
         android:text="@string/feed_new_items"
-        android:textSize="12sp"
-        android:theme="@style/ServiceColoredButton"
+        android:textSize="14sp"
         android:visibility="gone"
+        app:icon="@drawable/ic_refresh"
+        app:iconSize="20dp"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
         tools:visibility="visible" />
 
     <LinearLayout
