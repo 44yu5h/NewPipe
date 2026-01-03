@@ -15,7 +15,8 @@ plugins {
 
 val gitWorkingBranch = providers.exec {
     commandLine("git", "rev-parse", "--abbrev-ref", "HEAD")
-}.standardOutput.asText.map { it.trim() }
+    isIgnoreExitValue = true
+}.standardOutput.asText.map { it.trim().ifEmpty { "ui" } }
 
 java {
     toolchain {
